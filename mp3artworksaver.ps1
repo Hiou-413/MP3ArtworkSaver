@@ -23,7 +23,8 @@ foreach ($file in $mp3Files) {
         $index = 0
         foreach ($pic in $mp3.Tag.Pictures) {
             $outputName = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
-            $outputPath = Join-Path $targetFolder "$outputName" + "_art$index.jpg"
+            $outputFileName = "${outputName}_art$index.jpg"
+            $outputPath = Join-Path -Path $targetFolder -ChildPath $outputFileName
 
             [System.IO.File]::WriteAllBytes($outputPath, $pic.Data.Data)
             Write-Host "Extracted: $outputPath"
@@ -33,3 +34,4 @@ foreach ($file in $mp3Files) {
         Write-Host "No album art found: $($file.Name)"
     }
 }
+
