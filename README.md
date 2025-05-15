@@ -4,9 +4,11 @@ This project is a simple tool to extract embedded album artwork from `.mp3` file
 
 ## 📂 Features
 - Select a target folder containing MP3 files via a folder picker dialog.
+- Select a separate output folder to save extracted album artwork images.
 - Automatically extracts album artwork embedded in ID3 tags.
-- Saves extracted images as JPG files, named after the original MP3 filename.
-- Supports multiple artworks per file (if any).
+- **Saves only one artwork per album (by album tag), even if multiple MP3 files share the same album.**
+- Extracted images are saved as JPG files, named after the album name (`AlbumName_artwork.jpg`).
+- If the album tag is missing, the MP3 filename is used as the album name.
 
 ## ⚙️ Files
 - `dops1.bat` : A batch file to easily run the script.
@@ -34,10 +36,13 @@ After downloading, extract `TagLibSharp.dll` from the package (`.nupkg` file) an
 1. Place `dops1.bat`, `mp3artworksaver.ps1`, and `TagLibSharp.dll` in the same directory.
 2. Double-click `dops1.bat`.
 3. A folder selection dialog will appear. Choose the folder containing your MP3 files.
-4. Extracted album artworks will be saved as JPG files in the same folder as the MP3s.
+4. A second folder selection dialog will appear. Choose the folder where you want to save the extracted album artworks.
+5. Extracted album artworks will be saved as JPG files in the output folder, named as `AlbumName_artwork.jpg`.
 
 ## 📝 Notes
-- If a file contains multiple embedded images, images will be saved with index numbers like `_art0`, `_art1`, etc.
+- Only the first embedded image of each album (by album tag) is extracted and saved.
+- If multiple MP3 files share the same album tag, the artwork is saved only once for that album.
+- If the album tag is missing, the MP3 filename is used as the album name.
 - If an MP3 file does not contain any artwork, the script will display "No album art found".
 
 ## 📜 License
